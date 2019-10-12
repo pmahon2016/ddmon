@@ -19,6 +19,7 @@
                                Gateway: 192.168.1.1
                                
 *If you want or need to use different IPs (ex. 10.0.0.x) do a find and replace in the ddmon directory of your RPI
+
 *disable DHCP on your home router/AP
 
      Step 1: clone this repo to the root home dir of your Raspberry Pi
@@ -32,6 +33,6 @@
                       configure app security on gmail -> https://myaccount.google.com/lesssecureapps?pli=1
                       run the monitor file -> /root/ddmon/python3 dhcp_monitor.py
      
-      ****this is a work-in-progress so leave your comments 
+      ****this is a work-in-progress so leave your comments/Issues 
       
       Thanks!
