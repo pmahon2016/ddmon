@@ -5,7 +5,7 @@ After=syslog.target network-online.target
 
 [Service]
 Type=simple
-ExecStart=nice -18 /usr/bin/python3 /root/ddmon/new_leases.py
+ExecStart=nice -18 /usr/bin/python3 /root/ddmon/dhcp_monitor.py
 Restart=on-failure
 RestartSec=10
 KillMode=process

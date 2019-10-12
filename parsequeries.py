@@ -55,8 +55,7 @@ with open('/var/cache/bind/querylog', "r") as query_logfile:
                     domain_only = dot.join(domain_only)
                 # This routine ensures that known domains names are not included in the list
 
-                if s2 and domain_only not in white_list:
-                    if s2.group(1) not in white_list:  # had to run this separately to catch the full names
+                if s2 and s2.group(1) not in white_list:  # had to run this separately to catch the full names
                         value_list.append(s2.group(1))  # add the relevent domains to a list
                         total_domains.append(s2.group(1))
 
