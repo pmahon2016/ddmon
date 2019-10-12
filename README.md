@@ -4,7 +4,7 @@
 - Enjoy faster DNS query responses with your own DNS caching server
  
 
-                                                            
+                                                  Wireless Access Point (AP)     
             |Raspberry PI| ---ethernet----> |Fios/Cable/DSL WIFI Router|
              192.168.1.10                         192.168.1.1
                 eth0      ^\
