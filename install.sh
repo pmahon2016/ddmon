@@ -16,3 +16,7 @@ cp /root/ddmon/dhcpcd.conf /etc/
 cp /root/ddmon/dhcpd.conf /etc/dhcp/
 
 cp /root/ddmon/isc-dhcp-server  /etc/default/
+
+chmod u+x /root/ddmon/runpython.sh
+
+
