@@ -22,12 +22,17 @@
 
 *disable DHCP on your home router/AP
 
-     Step 1: clone this repo to the root home dir of your Raspberry Pi
-     Step 2: from the /root/ddmon dir...type ./install.sh
-     Step 3: to load DHCP & DNS type:
+*make sure the ethernet cable is connected from the RPI to the AP/router  (this is required for eth0 to load for DHCP service)
+
+     Step 1: clone this repo to the root home dir of your RPI (/root/git clone https://github.com/pmahon2016/ddmon.git )
+     Step 2: set script permission on install.sh   (/root/ddmon/chmod u+x install.sh)
+     Step 3: to install apps and services type -> /root/ddmon/install.sh
+     Step 4: to load DHCP & DNS type:
                      systemctl start bind9
                      systemctl start isc-dhcp-server
-     Step 4: Confgure gmail account and turn on DHCP monitoring tool. 
+                     if both start without any issue type -> systemctl restart bind9  (required to take log settings)
+                     
+     Step 5: Confgure gmail account and turn on DHCP monitoring tool. 
                       Edit /root/ddmon/email_config.py file to enter your google account information
                       Please be sure to setup an gmail mail account 
                       configure app security on gmail -> https://myaccount.google.com/lesssecureapps?pli=1
