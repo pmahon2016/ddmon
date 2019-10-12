@@ -28,16 +28,19 @@
      Step 2: set script permission on install.sh   (/root/ddmon/chmod u+x install.sh)
      Step 3: to install apps and services type -> /root/ddmon/install.sh
      Step 4: to load DHCP & DNS type:
-                     systemctl start bind9
-                     systemctl start isc-dhcp-server
-                     if both start without any issue type -> systemctl restart bind9  (required to take log settings)
+                     -systemctl start bind9
+                     -systemctl start isc-dhcp-server
+                     -if both start without any issue type -> systemctl restart bind9  (required to take log settings)
                      
      Step 5: Confgure gmail account and turn on DHCP monitoring tool. 
-                      Edit /root/ddmon/email_config.py file to enter your google account information
-                      Please be sure to setup an gmail mail account 
-                      configure app security on gmail -> https://myaccount.google.com/lesssecureapps?pli=1
-                      run the monitor file -> /root/ddmon/python3 dhcp_monitor.py
+                      -Edit /root/ddmon/email_config.py file to enter your google account information
+                      -Please be sure to setup an gmail mail account 
+                      -Configure app security on gmail -> https://myaccount.google.com/lesssecureapps?pli=1
+                      -Run the monitor file       -> python3 /root/ddmon/dhcp_monitor.py (loads the DHCP monitoring file. as n 
+                       device requests are generated, you should receive an email notification )
+                      -After some activity,type -> python3 /ddmon/parsequeries.py  ( should generate a report on DNS requests)
      
+    
       ****this is a work-in-progress so leave your comments/Issues 
       
       Thanks!
