@@ -1,0 +1,12 @@
+$ORIGIN 1.168.192.in-addr.arpa.
+$TTL 3h
+1.168.192.in-addr.arpa.    IN SOA  master.mydomain.com.  root.mydomain.com. (
+                                2019091601          ; serial
+                                8h     ; refresh (1 week)
+                                4h      ; retry (1 day)
+                                1w    ; expire (4 weeks)
+                                1h    ; minimum (1 week)
+                                )
+1.168.192.in-addr.arpa. IN NS master.mydomain.com.
+10			IN 	PTR dhcp.mydomain.
+1			IN	PTR router.mydomain.

@@ -1,0 +1,15 @@
+$TTL 3h
+$ORIGIN mydomain.com.
+mydomain.com. IN SOA master.mydomain.com. root.mydomain.com. (
+	2019091303 ; Serial
+	8h ; Refresh
+	4h ; Retry
+	1w ; Expire
+	1h ; Negative TTL
+)
+mydomain.com. IN NS master.mydomain.com.
+master	       IN	A	192.168.1.10
+router	       IN	A	192.168.1.1
+dhcp	       IN	A	192.168.1.10
+
+

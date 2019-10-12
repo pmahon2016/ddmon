@@ -1,0 +1,14 @@
+Description=DHCP_renewed_leases
+
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=nice -18 /usr/bin/python3 /root/ddmon/new_leases.py
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
