@@ -24,28 +24,26 @@
 *make sure the ethernet cable is connected from the RPI to the AP/router  (this is required for eth0 to load for DHCP service)
 
      Step 1: clone this repo to the root home dir of your RPI (/root/git clone https://github.com/pmahon2016/ddmon.git )
-     Step 2: set script permission on install.sh   (/root/ddmon/chmod u+x install.sh)
-     Step 3: to install apps and services type -> /root/ddmon/install.sh
-     Step 4: to load DHCP & DNS type:
-                     -systemctl start bind9
-                     -systemctl start isc-dhcp-server
-                     -if both start without any issue type -> systemctl restart bind9  (required to take log settings)
-                     
-     Step 5: Confgure gmail account and turn on DHCP monitoring tool. 
-                      -Edit /root/ddmon/email_config.py file to enter your google account information
-                      -Please be sure to setup an gmail mail account 
+     Step 2: to install apps and services type -> /root/ddmon/install.sh
+   ###                THE RPI WILL REBOOT !!!!                
+    
+     Step 3: login with ssh to 192.168.1.10 to confgure your gmail account
+                      -Please be sure to setup an gmail mail account to use for alerts
+                      -Edit the /root/ddmon/email_config.py file to enter your google account information
                       -Configure app security on gmail -> https://myaccount.google.com/lesssecureapps?pli=1
-                      -Run the monitor file       -> python3 /root/ddmon/dhcp_monitor.py (loads the DHCP monitoring file. as n 
-                       device requests are generated, you should receive an email notification )
-                      -After some activity,type -> python3 /ddmon/parsequeries.py  ( should generate a report on DNS requests)
      
-     Step 6: Run the DHCP monitoring tool as a service/process
-                      -systemctl start lease_renew.service   
+     Step 4: Run the following services: 
+                      -systemctl start bind9   ( DNS Server)
+                      -systemctl start isc-dhcp-server
+                      -systemctl start lease_renew.service
                       
    ### Finally: Make sure that the key services are running to confirm operation of your new DHCP and DNS server
-     Type -> systemctl status bind9  ( confirms DNS)
-              systemctl status isc-dhcp-server ( can give errors but start again and look in /var/log/syslog for cause) 
-              systemctl status lease_renew.service ( monitoring service - for alerts on new DHCP leases)
+       Type ->  systemctl status bind9  ( confirms DNS)
+                systemctl status isc-dhcp-server ( can give errors but start again and look in /var/log/syslog for cause) 
+                systemctl status lease_renew.service ( monitoring service - for alerts on new DHCP leases)
+                
+                As devices get new leases from your DHCP, you should receive alerts from your gmail account. Check              /var/log/syslog for errors if something doesn't work          
+                After some activity,type -> python3 /ddmon/parsequeries.py  ( should generate a report on DNS requests)
               
       ****this is a work-in-progress so leave your comments/Issues 
       
