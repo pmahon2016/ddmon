@@ -22,4 +22,4 @@ chmod u+x /root/ddmon/runpython.sh
 cp /root/ddmon/lease_renew.service /etc/systemd/system/
 
 systemctl daemon-reload
-
+reboot now
