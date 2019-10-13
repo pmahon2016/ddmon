@@ -7,16 +7,16 @@
                                                   Wireless Access Point (AP)     
             |Raspberry PI| ---ethernet----> |Fios/Cable/DSL WIFI Router|
              192.168.1.10                         192.168.1.1
-                eth0      ^\
-                             \ DHCP
-                              \ DNS
-                               \
-                               
-                             WIFI Clients (from DHCP)
-                               192.168.1.x
-                               255.255.255.0
-                               DNS 192.168.1.10
-                               Gateway: 192.168.1.1
+                eth0     
+                    ^  DHCP
+                    |  DNS
+                    |           
+                    |           
+          WIFI Clients (from DHCP)
+            192.168.1.x
+            255.255.255.0
+            DNS 192.168.1.10
+            Gateway: 192.168.1.1
                                
 *If you want or need to use different IPs (ex. 10.0.0.x) do a find and replace in the ddmon directory of your RPI
 
