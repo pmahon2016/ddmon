@@ -38,12 +38,13 @@
                       -systemctl start lease_renew.service
                       
    ### Finally: Make sure that the key services are running to confirm operation of your new DHCP and DNS server
-       Type ->  systemctl status bind9  ( confirms DNS)
-                systemctl status isc-dhcp-server ( can give errors but start again and look in /var/log/syslog for cause) 
-                systemctl status lease_renew.service ( monitoring service - for alerts on new DHCP leases)
+   systemctl status bind9  ( confirms DNS)
+   systemctl status isc-dhcp-server ( can give errors but start again and look in /var/log/syslog for cause) 
+   systemctl status lease_renew.service ( monitoring service - for alerts on new DHCP leases)
                 
-                As devices get new leases from your DHCP, you should receive alerts from your gmail account. Check              /var/log/syslog for errors if something doesn't work          
-                After some activity,type -> python3 /ddmon/parsequeries.py  ( should generate a report on DNS requests)
+   As devices get new leases from your DHCP, you should receive alerts from your gmail accoun            
+   After some activity,type -> python3 /ddmon/parsequeries.py  ( should generate a report on DNS requests)
+   Check /var/log/syslog for errors if something doesn't work or, create an issue here          
               
       ****this is a work-in-progress so leave your comments/Issues 
       
