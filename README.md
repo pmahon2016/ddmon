@@ -1,8 +1,7 @@
 # DHCP and DNS setup and Monitoring Tool for Raspberry PI
 - Use your Raspberry PI (RPI) to take control of your DNS and DHCP requests
-- Receive email notifications when devices join your network. Monitor DNS access to see DNS queries per each device on your       network. 
-- Enjoy faster DNS query responses with your own DNS caching server
- 
+- Get email alerts as devices join your network. Monitor DNS access to see DNS queries per each device request. 
+- Enjoy faster DNS query response time with your own DNS caching server
 
                                                   Wireless Access Point (AP)     
             |Raspberry PI| ---ethernet----> |Fios/Cable/DSL WIFI Router|
@@ -41,8 +40,13 @@
                       -After some activity,type -> python3 /ddmon/parsequeries.py  ( should generate a report on DNS requests)
      
      Step 6: Run the DHCP monitoring tool as a service/process
-                      -systemctl start lease_renew.service     
-                 
+                      -systemctl start lease_renew.service   
+                      
+   ### Finally: Make sure that the key services are running to confirm operation of your new DHCP and DNS server
+     Type -> systemctl status bind9  ( confirms DNS)
+              systemctl status isc-dhcp-server ( can give errors but start again and look in /var/log/syslog for cause) 
+              systemctl status lease_renew.service ( monitoring service - for alerts on new DHCP leases)
+              
       ****this is a work-in-progress so leave your comments/Issues 
       
       Thanks!
