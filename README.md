@@ -25,7 +25,7 @@
 
      Step 1: clone this repo to the root home dir of your RPI (/root/git clone https://github.com/pmahon2016/ddmon.git )
      Step 2: to install apps and services type -> /root/ddmon/install.sh
-   ###                THE RPI WILL REBOOT !!!!                
+   ####                       THE RPI WILL REBOOT !!!!                
     
      Step 3: login with ssh to 192.168.1.10 to confgure your gmail account
                       -Please be sure to setup an gmail mail account to use for alerts
