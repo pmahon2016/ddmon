@@ -40,7 +40,9 @@
                        device requests are generated, you should receive an email notification )
                       -After some activity,type -> python3 /ddmon/parsequeries.py  ( should generate a report on DNS requests)
      
-    
+     Step 6: Run the DHCP monitoring tool as a service/process
+                      -systemctl start lease_renew.service     
+                 
       ****this is a work-in-progress so leave your comments/Issues 
       
       Thanks!
