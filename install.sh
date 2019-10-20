@@ -22,4 +22,9 @@ chmod u+x /root/ddmon/runpython.sh
 cp /root/ddmon/lease_renew.service /etc/systemd/system/
 
 systemctl daemon-reload
+
+systemctl enable bind9
+systemctl enable isc-dhcp-server
+systemctl enable lease_renew.service
+
 reboot now
