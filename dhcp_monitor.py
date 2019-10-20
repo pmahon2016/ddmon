@@ -73,13 +73,12 @@ while True:
         for i in current_values:
             tosaverecords.write(i)
         tosaverecords.close()
-
+        print("hello")
         if len(diff_lease) != 0:
             build_email_body(diff_lease, current_values)
-
+            diff_lease.clear()
             body_string = " ".join(subject_list)  # this will be the body of the email
             subject_list.clear()
             send_notification.send_email(body_string)  # using email class instead
 
-            diff_lease.clear()
             time.sleep(0.2)
