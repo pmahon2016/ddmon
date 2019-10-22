@@ -1,3 +1,5 @@
+https://youtu.be/6lqt3ZQwHfg
+
 # DHCP and DNS setup and Monitoring Tool for Raspberry PI
 - Use your Raspberry PI (RPI) to take control of your DNS and DHCP requests
 - Get email alerts as devices join your network. Monitor DNS access to see DNS queries per each device request. 
