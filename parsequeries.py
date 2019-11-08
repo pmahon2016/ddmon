@@ -61,12 +61,13 @@ with open('/var/cache/bind/querylog', "r") as query_logfile:
 
         # make dictionary from the value_list with the domains as keys and the number of requests as values.
         tempdict = Counter(value_list)
-
-        for k, v in tempdict.items():
-            s3 = re.search(k, mystring)
-            if not s3:
-                newDict[ip_address].append(str(k) + '99999')
-
+        try:
+            for k, v in tempdict.items():
+                s3 = re.search(k, mystring)
+                if not s3:
+                    newDict[ip_address].append(str(k) + '99999')
+        except:
+            print("Some requests were corrupt: " + k + "\n")
         # sort the list
         temp_list = dict(sorted(tempdict.items(), key=itemgetter(1), reverse=True))
 
