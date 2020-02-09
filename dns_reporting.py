@@ -16,24 +16,25 @@ def printing_station(dic_object, count):
         if counter == count:
             return
         counter += 1
-        yield "{:<50} {}".format(str(k), str(v))
+        yield "{:<50} {}".format(k, v)
 
 
 def get_domain_list():
     search_pattern = re.compile(r'query:\s(.*?)\s')
-    domain_list = [re.search(search_pattern, x).group() for x in query_log]
+    domain_list = re.findall(search_pattern, query_log)
     temp = Counter(domain_list)
     top_list = dict(sorted(temp.items(), key=itemgetter(1), reverse=True))  # Sort the list and return a dictionary
-    [top_list.pop(y) for x in white_list for y in top_list.copy() if re.search(x, str(y))]  # filter out certain safe domains
-    print(len(top_list))
+    wl = white_list.split('\n')
+    [top_list.pop(y) for x in wl for y in top_list.copy() if re.search(x, y)]  # filter out certain safe domains
+
     for items in printing_station(top_list, 20):  # call the printing generator
         print(items)
 
 
 # function to parse the dhcp lease file for host names if not resolved by getaddr
 def get_name_dhcp(ip):
-    s = [x.split(ip)[-1] for x in dhcpleases]
-    s = [x.split('}')[0] for x in s]
+    s = dhcpleases.split(ip)[-1]
+    s = s.split('}')[0]
     p = r'client-hostname(.+?);'
     match = (re.search(p, ascii(s)))
     if match:
@@ -52,7 +53,7 @@ def get_name_dns(ip):
 
 def open_file(filename):
     with open(filename, 'r') as of:
-        ret_object = of.readlines()
+        ret_object = of.read()
         return ret_object
 
 
@@ -63,17 +64,16 @@ white_list = open_file('white_list.txt')
 
 
 def get_ip_activity():
-    p1 = re.compile(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}")  # pattern search for IP addresses in up coming loop
+    p1 = re.compile(r" 192\.168\.1\.\d{1,3}")  # pattern search for IP addresses in up coming loop
     # this is the routine to get the new source IPs
-    query_list = [re.search(p1, x).group() for x in query_log]
+    query_list = re.findall(p1, query_log)
     # run the counter ot get instances of IPs domain request.
     query_dic = Counter(query_list)  # make a dict with the ip as keys and count of each request as the value
     finallist = dict(sorted(query_dic.items(), key=itemgetter(1), reverse=True))  # provides a sorted list
 
     print("Top 20 List \t \t \t  Hits")
     for items in printing_station(finallist, 20):
-        print("{:<70} {}".format(items, get_name_dns(items[:15:].strip())))
-
+        print("{} \t {}".format(items, get_name_dns(items.split(" ")[1])))
     print("\n")
 
 
