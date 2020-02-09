@@ -1,5 +1,6 @@
 google.com
-apple.com
+pple.com
 icloud.com
 cloudfront.net
 amazon.com
+yahoo.com
