@@ -8,12 +8,14 @@ import sys, os, time
 from stat import *
 import subprocess
 from email_config import Emailconfig
-
-
+import re
 
 # list used to store new lease values
 diff_lease = []
 subject_list = []  # use to store body string in list values
+
+with open("leases.txt", "r") as lease_file:
+    no_send = lease_file.read().replace('\n', ' ')
 
 # some variables for the eamil from and recipients
 
@@ -22,10 +24,15 @@ send_notification = Emailconfig()
 
 # function to compare the two lease lists
 def compare_lists(newlist, oldlist):
+
     for i in newlist:
-        i = (i).rstrip('')  # this line removes the trailing quotes
-        if i not in oldlist:
-            diff_lease.append(i)
+        if not re.search(i[-8:].strip(), oldlist):
+            print(i[-8:].strip())
+            if re.search(i[-8:].strip(), no_send):
+                diff_lease.append(i + " soon to go away")
+                print(diff_lease[0])
+            else:
+                diff_lease.append(i)
 
 
 # function to build the text body of the email from new leases and full list.
@@ -42,7 +49,7 @@ def build_email_body(diff_list, full_list):
     subject_list.append("\n Total Records: " + str(len(current_values)))  # footer with record num count
 
 
-filename = "/root/ddmon/email_host_list.txt"
+filename = "/Users/paulmahon/PycharmProjects/ddmon/email_host_list.txt"
 # file to monitor for changes
 check_file = "/var/lib/dhcp/dhcpd.leases"
 
@@ -56,29 +63,33 @@ while True:
     file_info = os.stat(check_file)
     if file_time != file_info[ST_MTIME]:
         file_time = file_info[ST_MTIME]
-        subprocess.call("/root/ddmon/runpython.sh")
+        # subprocess.call("/root/ddmon/runpython.sh")
 
         attachment = open(filename, "r")
         current_values = attachment.readlines()
         attachment.close()
 
-        oldvalues = open("/root/ddmon/saved_values.txt", 'r')
-        save_values = oldvalues.readlines()
+        oldvalues = open("/Users/paulmahon/PycharmProjects/ddmon/saved_values.txt", 'r')
+        save_values = oldvalues.read().replace('\n',' ')
         oldvalues.close()
 
         # compare both files ---if the same --- end program ( mo new leases)
         compare_lists(current_values, save_values)
 
-        tosaverecords = open("/root/ddmon/saved_values.txt", "w")
+        tosaverecords = open("/Users/paulmahon/PycharmProjects/ddmon/saved_values.txt", "w")
         for i in current_values:
             tosaverecords.write(i)
         tosaverecords.close()
         print("hello")
+
         if len(diff_lease) != 0:
+            
             build_email_body(diff_lease, current_values)
+
             diff_lease.clear()
             body_string = " ".join(subject_list)  # this will be the body of the email
             subject_list.clear()
+
             send_notification.send_email(body_string)  # using email class instead
 
             time.sleep(0.2)
