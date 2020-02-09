@@ -2,3 +2,4 @@ google.com
 apple.com
 icloud.com
 cloudfront.net
+amazon.com
