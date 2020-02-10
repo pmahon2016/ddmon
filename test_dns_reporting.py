@@ -25,7 +25,14 @@ def get_domain_list():
     temp = Counter(domain_list)
     top_list = dict(sorted(temp.items(), key=itemgetter(1), reverse=True))  # Sort the list and return a dictionary
     print(len(top_list))
-    [top_list.pop(y) for x in white_list for y in top_list.copy() if re.search(x, str(y))]  # filter out certain safe domains
+
+    [top_list.pop(y) for x in white_list for y in top_list.copy() if re.search(x.strip(), str(y))]  # filter out certain safe domains
+    # for x in white_list:
+    #     for y in top_list.copy():
+    #         if re.search(x.strip(), y):
+    #             top_list.pop(y)
+
+
     print(len(top_list))
     for items in printing_station(top_list, 20):  # call the printing generator
         print(items)
